@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head lang="en">
+  <meta charset="utf-8">
+  <title>Demo</title>
+  <script src="codebase/jquery.js" type="text/javascript"></script>
+  <script src="codebase/jquery-ui.min.js" type="text/javascript"></script>
+  <script src="codebase/dhtmlx.js" type="text/javascript"></script>
+  <script src="codebase/pivot.min.js" type="text/javascript"></script>
+  <script src="data/WSCode.js" type="text/javascript"></script>
+  <script src="data/jsonObj.js" type="text/javascript"></script>
+  <script src="data/function.js" type="text/javascript"></script>
+  <link rel="STYLESHEET" type="text/css" href="codebase/dhtmlx.css"/>
+  <link rel="STYLESHEET" type="text/css" href="codebase/jquery-ui.min.css"/>
+  <link rel="STYLESHEET" type="text/css" href="codebase/pivot.min.css"/>
+  <style>
+  </style>
+  <script>
+    // Variables
+    var combo, option;
+    // Get images path
+    dhtmlx.image_path="codebase/imgs/";
+    dhtmlxEvent(window,"load",function() {
+
+      for (var i = 1; i <= 5200; i++) {
+        option = document.createElement("option");
+        option.text = "Test" + i;
+        document.getElementById("combo").add(option);
+      }
+    });
+  </script>
+  <body>
+    <select id="combo"></select>
+  </body>
+</html>

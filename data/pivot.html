@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test</title>
+  <head lang="en">
+  <meta charset="utf-8">
+  <title>Demo</title>
+  <script src="../codebase/jquery.js" type="text/javascript"></script>
+  <script src="../codebase/dhtmlx.js" type="text/javascript"></script>
+  <script src="../codebase/pivot.min.js" type="text/javascript"></script>
+  <link rel="STYLESHEET" type="text/css" href="../codebase/dhtmlx.css"/>
+  <link rel="STYLESHEET" type="text/css" href="../codebase/pivot.min.css"/>
+	<script>
+  var data;
+	var id;
+	var pivot;
+	var names = [];
+		function doOnLoad() {
+      var query = location.search.substr(1);
+      var result = {};
+      query.split("&").forEach(function(part) {
+        var item = part.split("=");
+        result[item[0]] = decodeURIComponent(item[1]);
+      });
+			if (result.dataset) {
+	      result.dataset = JSON.parse(result.dataset);
+	      data = result.dataset;
+				id = result.id;
+				id = id.split(",");
+				var name = {};
+				for (i = 0; i < id.length; i++) {
+					name.id = id[i];
+					name.label = id[i];
+					names.push(name);
+					name = {};
+				}
+	      createTableLocal();
+			} else {
+				createTableServer();
+			}
+		}
+
+		function createTableLocal() {
+			pivot = new dhx.Pivot(document.body, {
+				data: data,
+				fields: {
+					rows:[],
+					columns:[],
+					values:[],
+				},
+				fieldList: names
+			});
+		}
+
+    function createTableServer() {
+      pivot = new dhx.Pivot(document.body, {
+        data: parent.dataset,
+				fields: {
+					rows:[],
+					columns:[],
+					values:[],
+				},
+        fieldList: parent.names
+      });
+    }
+
+	</script>
+</head>
+<body onload="doOnLoad()">
+</body>
+</html>
